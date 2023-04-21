@@ -31,10 +31,10 @@ namespace DataLayer
 			base.OnModelCreating(modelBuilder);
 		}
 
-		public DbSet<Colony> colonies { get; set; }	
+		public DbSet<Colony> Colonies { get; set; }	
 
-		public DbSet<Cupboard> cupboard { get; set; }
+		public DbSet<Cupboard> Cupboard { get; set; }
 
-		public DbSet<PetriDish> petridish { get; set; }
+		public DbSet<PetriDish> Petridish { get; set; }
 	}
 }
