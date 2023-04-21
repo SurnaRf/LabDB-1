@@ -17,7 +17,7 @@ namespace BusinessLayer
         public int Id { get; set; }
 
         [Required]
-        public string Solvant { get; set; }
+        public string Solvent { get; set; }
 
         public float Diameter { get; set; }
 
@@ -41,16 +41,17 @@ namespace BusinessLayer
         }
 
         public PetriDish(
-            string solvant,
+            string solvent,
             float diameter,
             DateTime lastCheckDate,
             Cupboard cupboard)
             : this()
         {
-            Solvant = solvant;
+            Solvent = solvent;
             Diameter = diameter;
             LastCheckDate = lastCheckDate;
             Cupboard = cupboard;
         }
+        //MonkeS
     }
 }
