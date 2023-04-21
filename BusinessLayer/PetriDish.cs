@@ -50,6 +50,7 @@ namespace BusinessLayer
             Solvant = solvant;
             Diameter = diameter;
             LastCheckDate = lastCheckDate;
+            Cupboard = cupboard;
         }
     }
 }
