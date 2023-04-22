@@ -1,11 +1,11 @@
-﻿using BusinessLayer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using BusinessLayer;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer
 {
@@ -22,14 +22,13 @@ namespace DataLayer
 		{
 			try
 			{
+				// TODO (MilenSh): Add check for PetriDishes property
+				// (w/ the foreach and new List like in the Update method).
+
 				dbContext.Cupboards.Add(item);
 				dbContext.SaveChanges();
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
+			catch (Exception) { throw; }
 		}
 
 		public Cupboard Read(int key, bool useNavigationalProperties = false)
@@ -45,12 +44,8 @@ namespace DataLayer
 
 				return query.FirstOrDefault(c => c.Id == key);
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-		}
+            catch (Exception) { throw; }
+        }
 
 		public IEnumerable<Cupboard> ReadAll(bool useNavigationalProperties = false)
 		{
@@ -65,12 +60,8 @@ namespace DataLayer
 
 				return query.ToList();
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-		}
+            catch (Exception) { throw; }
+        }
 
 		public void Update(Cupboard item, bool useNavigationalProperties = false)
 		{
@@ -111,12 +102,8 @@ namespace DataLayer
 
 				dbContext.SaveChanges();
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-		}
+            catch (Exception) { throw; }
+        }
 
 		public void Delete(int key)
 		{
@@ -133,11 +120,7 @@ namespace DataLayer
 					throw new InvalidOperationException("A cupboard with that key does not exist!");
 				}
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-		}
+            catch (Exception) { throw; }
+        }
 	}
 }

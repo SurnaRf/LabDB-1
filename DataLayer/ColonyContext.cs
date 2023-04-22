@@ -1,11 +1,11 @@
-﻿using BusinessLayer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using BusinessLayer;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer
 {
@@ -32,12 +32,8 @@ namespace DataLayer
 				dbContext.Colonies.Add(item);
 				dbContext.SaveChanges();
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-		}
+            catch (Exception) { throw; }
+        }
 
 		public Colony Read(int key, bool useNavigationalProperties = false)
 		{
@@ -51,12 +47,8 @@ namespace DataLayer
 				}
 				return query.FirstOrDefault(c => c.Id == key);
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-		}
+            catch (Exception) { throw; }
+        }
 
 		public IEnumerable<Colony> ReadAll(bool useNavigationalProperties = false)
 		{
@@ -71,12 +63,8 @@ namespace DataLayer
 
 				return query.ToList();
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-		}
+            catch (Exception) { throw; }
+        }
 
 		public void Update(Colony item, bool useNavigationalProperties = false)
 		{
@@ -110,12 +98,8 @@ namespace DataLayer
 
 				dbContext.SaveChanges();
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-		}
+            catch (Exception) { throw; }
+        }
 
 		public void Delete(int key)
 		{
@@ -132,11 +116,7 @@ namespace DataLayer
 					throw new InvalidOperationException("A colony with that key does not exist!");
 				}
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-		}
+            catch (Exception) { throw; }
+        }
 	}
 }

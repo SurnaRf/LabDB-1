@@ -1,11 +1,11 @@
-﻿using BusinessLayer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using BusinessLayer;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer
 {
@@ -29,14 +29,13 @@ namespace DataLayer
 					item.Cupboard = cupboard;
 				}
 
-				dbContext.PetriDishes.Add(item);
+                // TODO (MilenSH): Add check for Colonies property
+                // (w/ the foreach and new List like in the Update method).
+
+                dbContext.PetriDishes.Add(item);
 				dbContext.SaveChanges();
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
+			catch (Exception) { throw; }
 		}
 
 		public PetriDish Read(int key, bool useNavigationalProperties = false)
@@ -53,12 +52,8 @@ namespace DataLayer
 
 				return query.FirstOrDefault(p => p.Id == key);
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-		}
+            catch (Exception) { throw; }
+        }
 
 		public IEnumerable<PetriDish> ReadAll(bool useNavigationalProperties = false)
 		{
@@ -74,12 +69,8 @@ namespace DataLayer
 
 				return query.ToList();
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-		}
+            catch (Exception) { throw; }
+        }
 
 		public void Update(PetriDish item, bool useNavigationalProperties = false)
 		{
@@ -129,12 +120,8 @@ namespace DataLayer
 				}
 				dbContext.SaveChanges();
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-		}
+            catch (Exception) { throw; }
+        }
 		public void Delete(int key)
 		{
 			try
@@ -151,11 +138,7 @@ namespace DataLayer
 					throw new InvalidOperationException("A petri dish with that key does not exist");
 				}
 			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-		}
+            catch (Exception) { throw; }
+        }
 	}
 }
