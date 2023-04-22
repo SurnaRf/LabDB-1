@@ -20,7 +20,7 @@ namespace DataLayer
 		{
 			if (!optionsBuilder.IsConfigured)
 			{
-				optionsBuilder.UseSqlServer("Server=DESKTOP-F3IKLD2;Database=Shop11JDb;Trusted_Connection=True;");
+				optionsBuilder.UseSqlServer("Server=DESKTOP-F3IKLD2;Database=LabDb;Trusted_Connection=True;");
 			}
 
 			base.OnConfiguring(optionsBuilder);
@@ -33,8 +33,8 @@ namespace DataLayer
 
 		public DbSet<Colony> Colonies { get; set; }	
 
-		public DbSet<Cupboard> Cupboard { get; set; }
+		public DbSet<Cupboard> Cupboards { get; set; }
 
-		public DbSet<PetriDish> Petridish { get; set; }
+		public DbSet<PetriDish> PetriDishes { get; set; }
 	}
 }
