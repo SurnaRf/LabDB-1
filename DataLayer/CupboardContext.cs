@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using BusinessLayer;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,10 +21,24 @@ namespace DataLayer
 		{
 			try
 			{
-				// TODO (MilenSh): Add check for PetriDishes property
-				// (w/ the foreach and new List like in the Update method).
+                List<PetriDish> petriDishes = new();
 
-				dbContext.Cupboards.Add(item);
+                foreach (PetriDish pd in item.PetriDishes)
+                {
+                     PetriDish petriDish = dbContext.PetriDishes.Find(pd.Id);
+
+                        if (petriDish != null)
+                        {
+                            petriDishes.Add(petriDish);
+                        }
+                        else
+                        {
+                            petriDishes.Add(pd);
+                        }
+                }
+				item.PetriDishes = petriDishes;
+
+                dbContext.Cupboards.Add(item);
 				dbContext.SaveChanges();
 			}
 			catch (Exception) { throw; }
