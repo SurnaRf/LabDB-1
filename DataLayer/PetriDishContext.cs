@@ -29,8 +29,22 @@ namespace DataLayer
 					item.Cupboard = cupboard;
 				}
 
-                // TODO (MilenSH): Add check for Colonies property
-                // (w/ the foreach and new List like in the Update method).
+                List<Colony> colonies = new List<Colony>();
+
+                foreach (Colony c in item.Colonies)
+                {
+                    Colony colony = dbContext.Colonies.Find(c.Id);
+
+                    if (colony != null)
+                    {
+                        colonies.Add(colony);
+                    }
+                    else
+                    {
+                        colonies.Add(c);
+                    }
+                }
+				item.Colonies = colonies;
 
                 dbContext.PetriDishes.Add(item);
 				dbContext.SaveChanges();

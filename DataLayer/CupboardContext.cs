@@ -25,16 +25,16 @@ namespace DataLayer
 
                 foreach (PetriDish pd in item.PetriDishes)
                 {
-                     PetriDish petriDish = dbContext.PetriDishes.Find(pd.Id);
+                    PetriDish petriDish = dbContext.PetriDishes.Find(pd.Id);
 
-                        if (petriDish != null)
-                        {
-                            petriDishes.Add(petriDish);
-                        }
-                        else
-                        {
-                            petriDishes.Add(pd);
-                        }
+					if (petriDish != null)
+					{
+					    petriDishes.Add(petriDish);
+					}
+					else
+					{
+					    petriDishes.Add(pd);
+					}
                 }
 				item.PetriDishes = petriDishes;
 
