@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using BusinessLayer;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,24 +22,10 @@ namespace DataLayer
 		{
 			try
 			{
-                List<PetriDish> petriDishes = new();
+				// TODO (MilenSh): Add check for PetriDishes property
+				// (w/ the foreach and new List like in the Update method).
 
-                foreach (PetriDish pd in item.PetriDishes)
-                {
-                    PetriDish petriDish = dbContext.PetriDishes.Find(pd.Id);
-
-					if (petriDish != null)
-					{
-					    petriDishes.Add(petriDish);
-					}
-					else
-					{
-					    petriDishes.Add(pd);
-					}
-                }
-				item.PetriDishes = petriDishes;
-
-                dbContext.Cupboards.Add(item);
+				dbContext.Cupboards.Add(item);
 				dbContext.SaveChanges();
 			}
 			catch (Exception) { throw; }
@@ -57,8 +44,8 @@ namespace DataLayer
 
 				return query.FirstOrDefault(c => c.Id == key);
 			}
-            catch (Exception) { throw; }
-        }
+			catch (Exception) { throw; }
+		}
 
 		public IEnumerable<Cupboard> ReadAll(bool useNavigationalProperties = false)
 		{
@@ -73,8 +60,8 @@ namespace DataLayer
 
 				return query.ToList();
 			}
-            catch (Exception) { throw; }
-        }
+			catch (Exception) { throw; }
+		}
 
 		public void Update(Cupboard item, bool useNavigationalProperties = false)
 		{
@@ -82,7 +69,7 @@ namespace DataLayer
 			{
 				Cupboard cupboard = Read(item.Id, useNavigationalProperties);
 
-				if (cupboard==null)
+				if (cupboard == null)
 				{
 					Create(item);
 					return;
@@ -115,8 +102,8 @@ namespace DataLayer
 
 				dbContext.SaveChanges();
 			}
-            catch (Exception) { throw; }
-        }
+			catch (Exception) { throw; }
+		}
 
 		public void Delete(int key)
 		{
@@ -127,13 +114,14 @@ namespace DataLayer
 				if (cupboard != null)
 				{
 					dbContext.Cupboards.Remove(cupboard);
+					dbContext.SaveChanges();
 				}
 				else
 				{
 					throw new InvalidOperationException("A cupboard with that key does not exist!");
 				}
 			}
-            catch (Exception) { throw; }
-        }
+			catch (Exception) { throw; }
+		}
 	}
 }
