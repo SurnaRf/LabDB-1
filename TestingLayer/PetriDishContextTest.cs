@@ -24,8 +24,8 @@ namespace TestingLayer
 			cupboard = new("A15", "Niet Snie", "infrared");
 			petriDish = new("water", 5, DateTime.Now, cupboard);
 
-			colony1 = new Colony("some1", 12, 4, petriDish);
-			colony2 = new Colony("some2", 15, 5, petriDish);
+			colony1 = new("some1", 12, 4, petriDish);
+			colony2 = new("some2", 15, 5, petriDish);
 
 			petriDish.Colonies.Add(colony1);
 			petriDish.Colonies.Add(colony2);
@@ -83,7 +83,7 @@ namespace TestingLayer
 		{
 			List<PetriDish> dishes = (List<PetriDish>)context.ReadAll();
 
-			Assert.That(dishes.Count != 0, "ReadAll() does not return brands!");
+			Assert.That(dishes.Count != 0, "ReadAll() does not return dishes!");
 		}
 
 		[Test]
