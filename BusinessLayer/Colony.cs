@@ -49,5 +49,10 @@ namespace BusinessLayer
             Days = days;
             PetriDish = petriDish;
         }
+
+        public override string ToString()
+        {
+            return $"<{Id}>-{BacteriaType}-{Count}";
+        }
     }
 }

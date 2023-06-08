@@ -28,50 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.colonyBtn = new System.Windows.Forms.Button();
-            this.petriDishBtn = new System.Windows.Forms.Button();
-            this.cupboardBtn = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            colonyBtn = new System.Windows.Forms.Button();
+            petriDishBtn = new System.Windows.Forms.Button();
+            cupboardBtn = new System.Windows.Forms.Button();
+            SuspendLayout();
             // 
             // colonyBtn
             // 
-            this.colonyBtn.Location = new System.Drawing.Point(103, 223);
-            this.colonyBtn.Name = "colonyBtn";
-            this.colonyBtn.Size = new System.Drawing.Size(94, 29);
-            this.colonyBtn.TabIndex = 0;
-            this.colonyBtn.Text = "Colonies";
-            this.colonyBtn.UseVisualStyleBackColor = true;
+            colonyBtn.Location = new System.Drawing.Point(103, 223);
+            colonyBtn.Name = "colonyBtn";
+            colonyBtn.Size = new System.Drawing.Size(94, 29);
+            colonyBtn.TabIndex = 0;
+            colonyBtn.Text = "Colonies";
+            colonyBtn.UseVisualStyleBackColor = true;
             // 
             // petriDishBtn
             // 
-            this.petriDishBtn.Location = new System.Drawing.Point(330, 223);
-            this.petriDishBtn.Name = "petriDishBtn";
-            this.petriDishBtn.Size = new System.Drawing.Size(94, 29);
-            this.petriDishBtn.TabIndex = 1;
-            this.petriDishBtn.Text = "Petri Dishes";
-            this.petriDishBtn.UseVisualStyleBackColor = true;
+            petriDishBtn.Location = new System.Drawing.Point(330, 223);
+            petriDishBtn.Name = "petriDishBtn";
+            petriDishBtn.Size = new System.Drawing.Size(94, 29);
+            petriDishBtn.TabIndex = 1;
+            petriDishBtn.Text = "Petri Dishes";
+            petriDishBtn.UseVisualStyleBackColor = true;
+            petriDishBtn.Click += petriDishBtn_Click;
             // 
             // cupboardBtn
             // 
-            this.cupboardBtn.Location = new System.Drawing.Point(562, 223);
-            this.cupboardBtn.Name = "cupboardBtn";
-            this.cupboardBtn.Size = new System.Drawing.Size(94, 29);
-            this.cupboardBtn.TabIndex = 2;
-            this.cupboardBtn.Text = "Cupboards";
-            this.cupboardBtn.UseVisualStyleBackColor = true;
+            cupboardBtn.Location = new System.Drawing.Point(562, 223);
+            cupboardBtn.Name = "cupboardBtn";
+            cupboardBtn.Size = new System.Drawing.Size(94, 29);
+            cupboardBtn.TabIndex = 2;
+            cupboardBtn.Text = "Cupboards";
+            cupboardBtn.UseVisualStyleBackColor = true;
             // 
             // LabApp
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.cupboardBtn);
-            this.Controls.Add(this.petriDishBtn);
-            this.Controls.Add(this.colonyBtn);
-            this.Name = "LabApp";
-            this.Text = "LabApp";
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(800, 450);
+            Controls.Add(cupboardBtn);
+            Controls.Add(petriDishBtn);
+            Controls.Add(colonyBtn);
+            Name = "LabApp";
+            Text = "LabApp";
+            ResumeLayout(false);
         }
 
         #endregion

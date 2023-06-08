@@ -52,6 +52,5 @@ namespace BusinessLayer
             LastCheckDate = lastCheckDate;
             Cupboard = cupboard;
         }
-        //MonkeS
     }
 }

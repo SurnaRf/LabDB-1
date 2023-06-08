@@ -17,6 +17,10 @@ namespace PresentationLayer
             InitializeComponent();
         }
 
-        
+        private void petriDishBtn_Click(object sender, EventArgs e)
+        {
+            PetriDishForm petriDishForm = new();
+            petriDishForm.ShowDialog();
+        }
     }
 }
