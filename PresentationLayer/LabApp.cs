@@ -10,23 +10,29 @@ using System.Windows.Forms;
 
 namespace PresentationLayer
 {
-    public partial class LabApp : Form
-    {
-        public LabApp()
-        {
-            InitializeComponent();
-        }
+	public partial class LabApp : Form
+	{
+		public LabApp()
+		{
+			InitializeComponent();
+		}
 
-        private void petriDishBtn_Click(object sender, EventArgs e)
-        {
-            PetriDishForm petriDishForm = new();
-            petriDishForm.ShowDialog();
-        }
+		private void petriDishBtn_Click(object sender, EventArgs e)
+		{
+			PetriDishForm petriDishForm = new();
+			petriDishForm.ShowDialog();
+		}
 
-        private void cupboardBtn_Click(object sender, EventArgs e)
-        {
-            CupboardForm cupboardForm = new();
-            cupboardForm.ShowDialog();
-        }
-    }
+		private void cupboardBtn_Click(object sender, EventArgs e)
+		{
+			CupboardForm cupboardForm = new();
+			cupboardForm.ShowDialog();
+		}
+
+		private void colonyBtn_Click(object sender, EventArgs e)
+		{
+			ColonyForm colonyForm = new ColonyForm();
+			colonyForm.ShowDialog();
+		}
+	}
 }
