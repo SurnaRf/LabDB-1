@@ -22,5 +22,11 @@ namespace PresentationLayer
             PetriDishForm petriDishForm = new();
             petriDishForm.ShowDialog();
         }
+
+        private void cupboardBtn_Click(object sender, EventArgs e)
+        {
+            CupboardForm cupboardForm = new();
+            cupboardForm.ShowDialog();
+        }
     }
 }
