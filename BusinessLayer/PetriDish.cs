@@ -52,5 +52,10 @@ namespace BusinessLayer
             LastCheckDate = lastCheckDate;
             Cupboard = cupboard;
         }
+
+        public override string ToString()
+        {
+            return $"<{Id}>-{Solvent}-{Diameter}-{LastCheckDate}";
+        }
     }
 }

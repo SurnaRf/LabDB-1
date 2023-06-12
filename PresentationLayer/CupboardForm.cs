@@ -39,6 +39,8 @@ namespace PresentationLayer
             }
         }
 
+        #region Helper Methods
+
         private void SetCreation(bool unlock = true)
         {
             createBtn.Enabled = unlock;
@@ -71,12 +73,27 @@ namespace PresentationLayer
                 roomTxtBox.Text = selectedCupboard.Room;
                 scientistTxtBox.Text = selectedCupboard.Scientist;
                 lightTxtBox.Text = selectedCupboard.LightType;
-                lightTxtBox.Text = string.Empty;
-
 
                 petriDishListBox.Items.Clear();
                 foreach (var dish in selectedCupboard.PetriDishes)
                     petriDishListBox.Items.Add(dish.ToString());
+            }
+            catch (Exception ex)
+            {
+                while (ex.InnerException != null) ex = ex.InnerException;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion
+
+        #region Events
+
+        private void CupboardForm_Shown(object sender, EventArgs e)
+        {
+            try
+            {
+                ClearState();
             }
             catch (Exception ex)
             {
@@ -186,5 +203,8 @@ namespace PresentationLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        #endregion
+
     }
 }

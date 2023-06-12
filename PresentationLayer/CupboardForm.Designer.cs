@@ -28,186 +28,186 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cupboardsGridView = new System.Windows.Forms.DataGridView();
-            this.roomTxtBox = new System.Windows.Forms.TextBox();
-            this.scientistTxtBox = new System.Windows.Forms.TextBox();
-            this.lightTxtBox = new System.Windows.Forms.TextBox();
-            this.createBtn = new System.Windows.Forms.Button();
-            this.updateBtn = new System.Windows.Forms.Button();
-            this.deleteBtn = new System.Windows.Forms.Button();
-            this.clearBtn = new System.Windows.Forms.Button();
-            this.closeBtn = new System.Windows.Forms.Button();
-            this.petriDishListBox = new System.Windows.Forms.ListBox();
-            ((System.ComponentModel.ISupportInitialize)(this.cupboardsGridView)).BeginInit();
-            this.SuspendLayout();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            cupboardsGridView = new System.Windows.Forms.DataGridView();
+            roomTxtBox = new System.Windows.Forms.TextBox();
+            scientistTxtBox = new System.Windows.Forms.TextBox();
+            lightTxtBox = new System.Windows.Forms.TextBox();
+            createBtn = new System.Windows.Forms.Button();
+            updateBtn = new System.Windows.Forms.Button();
+            deleteBtn = new System.Windows.Forms.Button();
+            clearBtn = new System.Windows.Forms.Button();
+            closeBtn = new System.Windows.Forms.Button();
+            petriDishListBox = new System.Windows.Forms.ListBox();
+            ((System.ComponentModel.ISupportInitialize)cupboardsGridView).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Room";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(12, 44);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(49, 20);
+            label1.TabIndex = 0;
+            label1.Text = "Room";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 84);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Scientist";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(12, 84);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(64, 20);
+            label2.TabIndex = 1;
+            label2.Text = "Scientist";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 128);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 20);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Light Type";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(12, 128);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(77, 20);
+            label3.TabIndex = 2;
+            label3.Text = "Light Type";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 311);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(85, 20);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Petri Dishes";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(16, 311);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(85, 20);
+            label5.TabIndex = 4;
+            label5.Text = "Petri Dishes";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(318, 18);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(81, 20);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Cupboards";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(318, 18);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(81, 20);
+            label6.TabIndex = 5;
+            label6.Text = "Cupboards";
             // 
             // cupboardsGridView
             // 
-            this.cupboardsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.cupboardsGridView.Location = new System.Drawing.Point(318, 41);
-            this.cupboardsGridView.Name = "cupboardsGridView";
-            this.cupboardsGridView.RowHeadersWidth = 51;
-            this.cupboardsGridView.RowTemplate.Height = 29;
-            this.cupboardsGridView.Size = new System.Drawing.Size(470, 397);
-            this.cupboardsGridView.TabIndex = 6;
-            this.cupboardsGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.cupboardsGridView_CellClick);
+            cupboardsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            cupboardsGridView.Location = new System.Drawing.Point(318, 41);
+            cupboardsGridView.Name = "cupboardsGridView";
+            cupboardsGridView.RowHeadersWidth = 51;
+            cupboardsGridView.RowTemplate.Height = 29;
+            cupboardsGridView.Size = new System.Drawing.Size(470, 397);
+            cupboardsGridView.TabIndex = 6;
+            cupboardsGridView.CellClick += cupboardsGridView_CellClick;
             // 
             // roomTxtBox
             // 
-            this.roomTxtBox.Location = new System.Drawing.Point(118, 41);
-            this.roomTxtBox.Name = "roomTxtBox";
-            this.roomTxtBox.Size = new System.Drawing.Size(194, 27);
-            this.roomTxtBox.TabIndex = 7;
+            roomTxtBox.Location = new System.Drawing.Point(118, 41);
+            roomTxtBox.Name = "roomTxtBox";
+            roomTxtBox.Size = new System.Drawing.Size(194, 27);
+            roomTxtBox.TabIndex = 7;
             // 
             // scientistTxtBox
             // 
-            this.scientistTxtBox.Location = new System.Drawing.Point(118, 81);
-            this.scientistTxtBox.Name = "scientistTxtBox";
-            this.scientistTxtBox.Size = new System.Drawing.Size(194, 27);
-            this.scientistTxtBox.TabIndex = 8;
+            scientistTxtBox.Location = new System.Drawing.Point(118, 81);
+            scientistTxtBox.Name = "scientistTxtBox";
+            scientistTxtBox.Size = new System.Drawing.Size(194, 27);
+            scientistTxtBox.TabIndex = 8;
             // 
             // lightTxtBox
             // 
-            this.lightTxtBox.Location = new System.Drawing.Point(118, 125);
-            this.lightTxtBox.Name = "lightTxtBox";
-            this.lightTxtBox.Size = new System.Drawing.Size(194, 27);
-            this.lightTxtBox.TabIndex = 9;
+            lightTxtBox.Location = new System.Drawing.Point(118, 125);
+            lightTxtBox.Name = "lightTxtBox";
+            lightTxtBox.Size = new System.Drawing.Size(194, 27);
+            lightTxtBox.TabIndex = 9;
             // 
             // createBtn
             // 
-            this.createBtn.Location = new System.Drawing.Point(16, 225);
-            this.createBtn.Name = "createBtn";
-            this.createBtn.Size = new System.Drawing.Size(94, 29);
-            this.createBtn.TabIndex = 11;
-            this.createBtn.Text = "Create";
-            this.createBtn.UseVisualStyleBackColor = true;
-            this.createBtn.Click += new System.EventHandler(this.createBtn_Click);
+            createBtn.Location = new System.Drawing.Point(16, 225);
+            createBtn.Name = "createBtn";
+            createBtn.Size = new System.Drawing.Size(94, 29);
+            createBtn.TabIndex = 11;
+            createBtn.Text = "Create";
+            createBtn.UseVisualStyleBackColor = true;
+            createBtn.Click += createBtn_Click;
             // 
             // updateBtn
             // 
-            this.updateBtn.Location = new System.Drawing.Point(118, 225);
-            this.updateBtn.Name = "updateBtn";
-            this.updateBtn.Size = new System.Drawing.Size(94, 29);
-            this.updateBtn.TabIndex = 12;
-            this.updateBtn.Text = "Update";
-            this.updateBtn.UseVisualStyleBackColor = true;
-            this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
+            updateBtn.Location = new System.Drawing.Point(118, 225);
+            updateBtn.Name = "updateBtn";
+            updateBtn.Size = new System.Drawing.Size(94, 29);
+            updateBtn.TabIndex = 12;
+            updateBtn.Text = "Update";
+            updateBtn.UseVisualStyleBackColor = true;
+            updateBtn.Click += updateBtn_Click;
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(218, 225);
-            this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(94, 29);
-            this.deleteBtn.TabIndex = 13;
-            this.deleteBtn.Text = "Delete";
-            this.deleteBtn.UseVisualStyleBackColor = true;
-            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
+            deleteBtn.Location = new System.Drawing.Point(218, 225);
+            deleteBtn.Name = "deleteBtn";
+            deleteBtn.Size = new System.Drawing.Size(94, 29);
+            deleteBtn.TabIndex = 13;
+            deleteBtn.Text = "Delete";
+            deleteBtn.UseVisualStyleBackColor = true;
+            deleteBtn.Click += deleteBtn_Click;
             // 
             // clearBtn
             // 
-            this.clearBtn.Location = new System.Drawing.Point(118, 260);
-            this.clearBtn.Name = "clearBtn";
-            this.clearBtn.Size = new System.Drawing.Size(94, 29);
-            this.clearBtn.TabIndex = 14;
-            this.clearBtn.Text = "Clear";
-            this.clearBtn.UseVisualStyleBackColor = true;
-            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
+            clearBtn.Location = new System.Drawing.Point(118, 260);
+            clearBtn.Name = "clearBtn";
+            clearBtn.Size = new System.Drawing.Size(94, 29);
+            clearBtn.TabIndex = 14;
+            clearBtn.Text = "Clear";
+            clearBtn.UseVisualStyleBackColor = true;
+            clearBtn.Click += clearBtn_Click;
             // 
             // closeBtn
             // 
-            this.closeBtn.Location = new System.Drawing.Point(218, 260);
-            this.closeBtn.Name = "closeBtn";
-            this.closeBtn.Size = new System.Drawing.Size(94, 29);
-            this.closeBtn.TabIndex = 15;
-            this.closeBtn.Text = "Close";
-            this.closeBtn.UseVisualStyleBackColor = true;
-            this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
+            closeBtn.Location = new System.Drawing.Point(218, 260);
+            closeBtn.Name = "closeBtn";
+            closeBtn.Size = new System.Drawing.Size(94, 29);
+            closeBtn.TabIndex = 15;
+            closeBtn.Text = "Close";
+            closeBtn.UseVisualStyleBackColor = true;
+            closeBtn.Click += closeBtn_Click;
             // 
             // petriDishListBox
             // 
-            this.petriDishListBox.FormattingEnabled = true;
-            this.petriDishListBox.ItemHeight = 20;
-            this.petriDishListBox.Location = new System.Drawing.Point(12, 334);
-            this.petriDishListBox.Name = "petriDishListBox";
-            this.petriDishListBox.Size = new System.Drawing.Size(295, 104);
-            this.petriDishListBox.TabIndex = 16;
+            petriDishListBox.FormattingEnabled = true;
+            petriDishListBox.ItemHeight = 20;
+            petriDishListBox.Location = new System.Drawing.Point(12, 334);
+            petriDishListBox.Name = "petriDishListBox";
+            petriDishListBox.Size = new System.Drawing.Size(295, 104);
+            petriDishListBox.TabIndex = 16;
             // 
             // CupboardForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.petriDishListBox);
-            this.Controls.Add(this.closeBtn);
-            this.Controls.Add(this.clearBtn);
-            this.Controls.Add(this.deleteBtn);
-            this.Controls.Add(this.updateBtn);
-            this.Controls.Add(this.createBtn);
-            this.Controls.Add(this.lightTxtBox);
-            this.Controls.Add(this.scientistTxtBox);
-            this.Controls.Add(this.roomTxtBox);
-            this.Controls.Add(this.cupboardsGridView);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Name = "CupboardForm";
-            this.Text = "CupboardForm";
-            ((System.ComponentModel.ISupportInitialize)(this.cupboardsGridView)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(800, 450);
+            Controls.Add(petriDishListBox);
+            Controls.Add(closeBtn);
+            Controls.Add(clearBtn);
+            Controls.Add(deleteBtn);
+            Controls.Add(updateBtn);
+            Controls.Add(createBtn);
+            Controls.Add(lightTxtBox);
+            Controls.Add(scientistTxtBox);
+            Controls.Add(roomTxtBox);
+            Controls.Add(cupboardsGridView);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Name = "CupboardForm";
+            Text = "CupboardForm";
+            Shown += CupboardForm_Shown;
+            ((System.ComponentModel.ISupportInitialize)cupboardsGridView).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

@@ -13,197 +13,211 @@ using System.Windows.Forms;
 
 namespace PresentationLayer
 {
-	public partial class ColonyForm : Form
-	{
-		private DbManager<Colony, int> dbManager = new(ContextGenerator.GetColonyContext());
+    public partial class ColonyForm : Form
+    {
+        private DbManager<Colony, int> dbManager = new(ContextGenerator.GetColonyContext());
 
-		private DbManager<PetriDish, int> petriDishManager = new(ContextGenerator.GetPetriDishContext());
+        private DbManager<PetriDish, int> petriDishManager = new(ContextGenerator.GetPetriDishContext());
 
-		private SortedDictionary<int, Colony>? trackedColonies;
-		private Colony? selectedColony = null;
-		public ColonyForm()
-		{
-			InitializeComponent();
-			try
-			{
-				trackedColonies = new(dbManager.ReadAll(true)
-					.ToDictionary(d => d.Id));
+        private SortedDictionary<int, Colony>? trackedColonies;
+        private Colony? selectedColony = null;
+        public ColonyForm()
+        {
+            InitializeComponent();
+            try
+            {
+                trackedColonies = new(dbManager.ReadAll(true)
+                    .ToDictionary(d => d.Id));
 
-				petriDishesListBox.DisplayMember = "Solvent";
-				foreach (PetriDish petriDish in petriDishManager.ReadAll())
-					petriDishesListBox.Items.Add(petriDish);
+                petriDishesListBox.DisplayMember = "Solvent";
+                foreach (PetriDish petriDish in petriDishManager.ReadAll())
+                    petriDishesListBox.Items.Add(petriDish);
 
-				coloniesDataGridView.ReadOnly = true;
-			}
-			catch (Exception ex)
-			{
-				while (ex.InnerException != null) ex = ex.InnerException;
-				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-					
-		}
-		#region Events		
+                coloniesDataGridView.ReadOnly = true;
+            }
+            catch (Exception ex)
+            {
+                while (ex.InnerException != null) ex = ex.InnerException;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-		private void createBtn_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				if (ValidationManager.IsValidString(bacteriaTxtBox.Text))
-				{
-					string bacteriaType = bacteriaTxtBox.Text;
-					int count = (int)countNumericUpDown.Value;
-					int days = (int)daysNumericUpDown.Value;
+        #region Events		
 
-					PetriDish petriDish = petriDishesListBox.SelectedItem as PetriDish;
+        private void ColonyForm_Shown(object sender, EventArgs e)
+        {
+            try
+            {
+                ClearState();
+            }
+            catch (Exception ex)
+            {
+                while (ex.InnerException != null) ex = ex.InnerException;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-					Colony colony = new(bacteriaType, count, days, petriDish);
-					dbManager.Create(colony);
+        private void createBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ValidationManager.IsValidString(bacteriaTxtBox.Text))
+                {
+                    string bacteriaType = bacteriaTxtBox.Text;
+                    int count = (int)countNumericUpDown.Value;
+                    int days = (int)daysNumericUpDown.Value;
 
-					trackedColonies?.Add(colony.Id, colony);
+                    PetriDish petriDish = petriDishesListBox.SelectedItem as PetriDish;
 
-					MessageBox.Show("Colony created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Colony colony = new(bacteriaType, count, days, petriDish);
+                    dbManager.Create(colony);
 
-					ClearState();
-				}
-				else
-				{
-					MessageBox.Show("You have to enter values in the text boxes!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					bacteriaTxtBox.Focus();
-				}
-			}
-			catch (Exception ex)
-			{
-				while (ex.InnerException != null) ex = ex.InnerException;
-				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
+                    trackedColonies?.Add(colony.Id, colony);
 
-		private void updateBtn_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				if (ValidationManager.IsValidString(bacteriaTxtBox.Text)
-					&& selectedColony != null)
-				{
-					selectedColony.BacteriaType = bacteriaTxtBox.Text;
-					selectedColony.Count = (int)countNumericUpDown.Value;
-					selectedColony.Days = (int)daysNumericUpDown.Value;
-					selectedColony.PetriDish = petriDishesListBox.SelectedItem as PetriDish;
+                    MessageBox.Show("Colony created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-					dbManager.Update(selectedColony, true);
-					
-					MessageBox.Show("Colony updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearState();
+                }
+                else
+                {
+                    MessageBox.Show("You have to enter values in the text boxes!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    bacteriaTxtBox.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                while (ex.InnerException != null) ex = ex.InnerException;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-					bacteriaTxtBox.Focus();
-				}
-				else
-				{
-					MessageBox.Show("A colony must be selected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-			}
-			catch (Exception)
-			{
+        private void updateBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ValidationManager.IsValidString(bacteriaTxtBox.Text)
+                    && selectedColony != null)
+                {
+                    selectedColony.BacteriaType = bacteriaTxtBox.Text;
+                    selectedColony.Count = (int)countNumericUpDown.Value;
+                    selectedColony.Days = (int)daysNumericUpDown.Value;
+                    selectedColony.PetriDish = petriDishesListBox.SelectedItem as PetriDish;
 
-				throw;
-			}
-		}
+                    dbManager.Update(selectedColony, true);
 
-		private void deleteBtn_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				if (selectedColony != null)
-				{
-					trackedColonies?.Remove(selectedColony.Id);
-					dbManager.Delete(selectedColony.Id);
-					MessageBox.Show("Colony deleted successfully!", "Successful operation", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					ClearState();
-				}
-				else
-				{
-					MessageBox.Show("A colony must be selected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-			}
-			catch (Exception)
-			{
+                    MessageBox.Show("Colony updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-				throw;
-			}
-		}
+                    bacteriaTxtBox.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("A colony must be selected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                while (ex.InnerException != null) ex = ex.InnerException;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-		private void coloniesDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-		{
-			try
-			{
-				if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (selectedColony != null)
+                {
+                    trackedColonies?.Remove(selectedColony.Id);
+                    dbManager.Delete(selectedColony.Id);
+                    MessageBox.Show("Colony deleted successfully!", "Successful operation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearState();
+                }
+                else
+                {
+                    MessageBox.Show("A colony must be selected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                while (ex.InnerException != null) ex = ex.InnerException;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-				selectedColony = coloniesDataGridView.Rows[e.RowIndex].DataBoundItem as Colony;
-				SetCreation(false);
-				FillInputs();
-			}
-			catch (Exception ex)
-			{
-				while (ex.InnerException != null) ex = ex.InnerException;
-				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
+        private void coloniesDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
-		private void clearBtn_Click(object sender, EventArgs e)
-		{
-			ClearState();
-		}
+                selectedColony = coloniesDataGridView.Rows[e.RowIndex].DataBoundItem as Colony;
+                SetCreation(false);
+                FillInputs();
+            }
+            catch (Exception ex)
+            {
+                while (ex.InnerException != null) ex = ex.InnerException;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-		private void closeBtn_Click(object sender, EventArgs e)
-		{
-			this.Close();
-		}
-		#endregion
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            ClearState();
+        }
 
-		#region Methods
+        private void closeBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
-		private void SetCreation(bool unlock = true)
-		{
-			createBtn.Enabled = unlock;
+        #endregion
 
-			updateBtn.Enabled =
-			deleteBtn.Enabled = !unlock;
-		}
+        #region Methods
 
-		private void ClearState()
-		{
-			SetCreation();
+        private void SetCreation(bool unlock = true)
+        {
+            createBtn.Enabled = unlock;
 
-			selectedColony = null;
+            updateBtn.Enabled =
+            deleteBtn.Enabled = !unlock;
+        }
 
-			bacteriaTxtBox.Text = string.Empty;
-			bacteriaTxtBox.Focus();
+        private void ClearState()
+        {
+            SetCreation();
 
-			countNumericUpDown.Value = 0;
-			daysNumericUpDown.Value = 0;
+            selectedColony = null;
 
-			coloniesDataGridView.DataSource = null;
-			coloniesDataGridView.DataSource = trackedColonies?.Values.ToList();
-		}
+            bacteriaTxtBox.Text = string.Empty;
+            bacteriaTxtBox.Focus();
 
-		private void FillInputs()
-		{
-			if (selectedColony == null) { return; }
+            countNumericUpDown.Value = 0;
+            daysNumericUpDown.Value = 0;
 
-			try
-			{
-				bacteriaTxtBox.Text = selectedColony.BacteriaType;
-				countNumericUpDown.Value = selectedColony.Count;
-				daysNumericUpDown.Value = selectedColony.Days;
-				petriDishesListBox.SelectedItem = selectedColony.PetriDish;
-			}
-			catch (Exception ex)
-			{
-				while (ex.InnerException != null) ex = ex.InnerException;
-				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-		
-		#endregion
-	
-	}
+            coloniesDataGridView.DataSource = null;
+            coloniesDataGridView.DataSource = trackedColonies?.Values.ToList();
+        }
+
+        private void FillInputs()
+        {
+            if (selectedColony == null) { return; }
+
+            try
+            {
+                bacteriaTxtBox.Text = selectedColony.BacteriaType;
+                countNumericUpDown.Value = selectedColony.Count;
+                daysNumericUpDown.Value = selectedColony.Days;
+                petriDishesListBox.SelectedItem = selectedColony.PetriDish;
+            }
+            catch (Exception ex)
+            {
+                while (ex.InnerException != null) ex = ex.InnerException;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion
+
+    }
 }

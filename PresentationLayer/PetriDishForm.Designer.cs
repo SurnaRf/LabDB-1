@@ -28,203 +28,209 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.solventLabel = new System.Windows.Forms.Label();
-            this.solventTxtBox = new System.Windows.Forms.TextBox();
-            this.petriDishesLabel = new System.Windows.Forms.Label();
-            this.dishesGridView = new System.Windows.Forms.DataGridView();
-            this.Diameter = new System.Windows.Forms.Label();
-            this.diameterNum = new System.Windows.Forms.NumericUpDown();
-            this.lastCheckedDateLabel = new System.Windows.Forms.Label();
-            this.datePicker = new System.Windows.Forms.DateTimePicker();
-            this.cupboardLabel = new System.Windows.Forms.Label();
-            this.cupboardComboBox = new System.Windows.Forms.ComboBox();
-            this.createBtn = new System.Windows.Forms.Button();
-            this.updateBtn = new System.Windows.Forms.Button();
-            this.deleteBtn = new System.Windows.Forms.Button();
-            this.clearBtn = new System.Windows.Forms.Button();
-            this.closeBtn = new System.Windows.Forms.Button();
-            this.coloniesLabel = new System.Windows.Forms.Label();
-            this.colonyListBox = new System.Windows.Forms.ListBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dishesGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diameterNum)).BeginInit();
-            this.SuspendLayout();
+            solventLabel = new System.Windows.Forms.Label();
+            solventTxtBox = new System.Windows.Forms.TextBox();
+            petriDishesLabel = new System.Windows.Forms.Label();
+            dishesGridView = new System.Windows.Forms.DataGridView();
+            Diameter = new System.Windows.Forms.Label();
+            diameterNum = new System.Windows.Forms.NumericUpDown();
+            lastCheckedDateLabel = new System.Windows.Forms.Label();
+            datePicker = new System.Windows.Forms.DateTimePicker();
+            cupboardLabel = new System.Windows.Forms.Label();
+            cupboardComboBox = new System.Windows.Forms.ComboBox();
+            createBtn = new System.Windows.Forms.Button();
+            updateBtn = new System.Windows.Forms.Button();
+            deleteBtn = new System.Windows.Forms.Button();
+            clearBtn = new System.Windows.Forms.Button();
+            closeBtn = new System.Windows.Forms.Button();
+            coloniesLabel = new System.Windows.Forms.Label();
+            colonyListBox = new System.Windows.Forms.ListBox();
+            ((System.ComponentModel.ISupportInitialize)dishesGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)diameterNum).BeginInit();
+            SuspendLayout();
             // 
             // solventLabel
             // 
-            this.solventLabel.AutoSize = true;
-            this.solventLabel.Location = new System.Drawing.Point(12, 39);
-            this.solventLabel.Name = "solventLabel";
-            this.solventLabel.Size = new System.Drawing.Size(58, 20);
-            this.solventLabel.TabIndex = 0;
-            this.solventLabel.Text = "Solvent";
+            solventLabel.AutoSize = true;
+            solventLabel.Location = new System.Drawing.Point(12, 39);
+            solventLabel.Name = "solventLabel";
+            solventLabel.Size = new System.Drawing.Size(58, 20);
+            solventLabel.TabIndex = 0;
+            solventLabel.Text = "Solvent";
             // 
             // solventTxtBox
             // 
-            this.solventTxtBox.Location = new System.Drawing.Point(118, 36);
-            this.solventTxtBox.Name = "solventTxtBox";
-            this.solventTxtBox.Size = new System.Drawing.Size(188, 27);
-            this.solventTxtBox.TabIndex = 0;
+            solventTxtBox.Location = new System.Drawing.Point(118, 36);
+            solventTxtBox.Name = "solventTxtBox";
+            solventTxtBox.Size = new System.Drawing.Size(188, 27);
+            solventTxtBox.TabIndex = 0;
             // 
             // petriDishesLabel
             // 
-            this.petriDishesLabel.AutoSize = true;
-            this.petriDishesLabel.Location = new System.Drawing.Point(312, 13);
-            this.petriDishesLabel.Name = "petriDishesLabel";
-            this.petriDishesLabel.Size = new System.Drawing.Size(85, 20);
-            this.petriDishesLabel.TabIndex = 2;
-            this.petriDishesLabel.Text = "Petri Dishes";
+            petriDishesLabel.AutoSize = true;
+            petriDishesLabel.Location = new System.Drawing.Point(312, 13);
+            petriDishesLabel.Name = "petriDishesLabel";
+            petriDishesLabel.Size = new System.Drawing.Size(85, 20);
+            petriDishesLabel.TabIndex = 2;
+            petriDishesLabel.Text = "Petri Dishes";
             // 
             // dishesGridView
             // 
-            this.dishesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dishesGridView.Location = new System.Drawing.Point(312, 36);
-            this.dishesGridView.Name = "dishesGridView";
-            this.dishesGridView.RowHeadersWidth = 51;
-            this.dishesGridView.RowTemplate.Height = 29;
-            this.dishesGridView.Size = new System.Drawing.Size(476, 396);
-            this.dishesGridView.TabIndex = 8;
+            dishesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dishesGridView.Location = new System.Drawing.Point(312, 36);
+            dishesGridView.Name = "dishesGridView";
+            dishesGridView.RowHeadersWidth = 51;
+            dishesGridView.RowTemplate.Height = 29;
+            dishesGridView.Size = new System.Drawing.Size(476, 396);
+            dishesGridView.TabIndex = 8;
+            dishesGridView.CellClick += dishesGridView_CellClick;
             // 
             // Diameter
             // 
-            this.Diameter.AutoSize = true;
-            this.Diameter.Location = new System.Drawing.Point(12, 88);
-            this.Diameter.Name = "Diameter";
-            this.Diameter.Size = new System.Drawing.Size(71, 20);
-            this.Diameter.TabIndex = 4;
-            this.Diameter.Text = "Diameter";
+            Diameter.AutoSize = true;
+            Diameter.Location = new System.Drawing.Point(12, 88);
+            Diameter.Name = "Diameter";
+            Diameter.Size = new System.Drawing.Size(71, 20);
+            Diameter.TabIndex = 4;
+            Diameter.Text = "Diameter";
             // 
             // diameterNum
             // 
-            this.diameterNum.Location = new System.Drawing.Point(118, 86);
-            this.diameterNum.Name = "diameterNum";
-            this.diameterNum.Size = new System.Drawing.Size(188, 27);
-            this.diameterNum.TabIndex = 1;
+            diameterNum.Location = new System.Drawing.Point(118, 86);
+            diameterNum.Name = "diameterNum";
+            diameterNum.Size = new System.Drawing.Size(188, 27);
+            diameterNum.TabIndex = 1;
             // 
             // lastCheckedDateLabel
             // 
-            this.lastCheckedDateLabel.AutoSize = true;
-            this.lastCheckedDateLabel.Location = new System.Drawing.Point(12, 136);
-            this.lastCheckedDateLabel.Name = "lastCheckedDateLabel";
-            this.lastCheckedDateLabel.Size = new System.Drawing.Size(95, 20);
-            this.lastCheckedDateLabel.TabIndex = 6;
-            this.lastCheckedDateLabel.Text = "Last Checked";
+            lastCheckedDateLabel.AutoSize = true;
+            lastCheckedDateLabel.Location = new System.Drawing.Point(12, 136);
+            lastCheckedDateLabel.Name = "lastCheckedDateLabel";
+            lastCheckedDateLabel.Size = new System.Drawing.Size(95, 20);
+            lastCheckedDateLabel.TabIndex = 6;
+            lastCheckedDateLabel.Text = "Last Checked";
             // 
             // datePicker
             // 
-            this.datePicker.Location = new System.Drawing.Point(118, 131);
-            this.datePicker.Name = "datePicker";
-            this.datePicker.Size = new System.Drawing.Size(188, 27);
-            this.datePicker.TabIndex = 2;
+            datePicker.Location = new System.Drawing.Point(118, 131);
+            datePicker.Name = "datePicker";
+            datePicker.Size = new System.Drawing.Size(188, 27);
+            datePicker.TabIndex = 2;
             // 
             // cupboardLabel
             // 
-            this.cupboardLabel.AutoSize = true;
-            this.cupboardLabel.Location = new System.Drawing.Point(12, 187);
-            this.cupboardLabel.Name = "cupboardLabel";
-            this.cupboardLabel.Size = new System.Drawing.Size(75, 20);
-            this.cupboardLabel.TabIndex = 8;
-            this.cupboardLabel.Text = "Cupboard";
+            cupboardLabel.AutoSize = true;
+            cupboardLabel.Location = new System.Drawing.Point(12, 187);
+            cupboardLabel.Name = "cupboardLabel";
+            cupboardLabel.Size = new System.Drawing.Size(75, 20);
+            cupboardLabel.TabIndex = 8;
+            cupboardLabel.Text = "Cupboard";
             // 
             // cupboardComboBox
             // 
-            this.cupboardComboBox.FormattingEnabled = true;
-            this.cupboardComboBox.Location = new System.Drawing.Point(118, 184);
-            this.cupboardComboBox.Name = "cupboardComboBox";
-            this.cupboardComboBox.Size = new System.Drawing.Size(188, 28);
-            this.cupboardComboBox.TabIndex = 3;
+            cupboardComboBox.FormattingEnabled = true;
+            cupboardComboBox.Location = new System.Drawing.Point(118, 184);
+            cupboardComboBox.Name = "cupboardComboBox";
+            cupboardComboBox.Size = new System.Drawing.Size(188, 28);
+            cupboardComboBox.TabIndex = 3;
             // 
             // createBtn
             // 
-            this.createBtn.Location = new System.Drawing.Point(12, 230);
-            this.createBtn.Name = "createBtn";
-            this.createBtn.Size = new System.Drawing.Size(94, 29);
-            this.createBtn.TabIndex = 10;
-            this.createBtn.Text = "Create";
-            this.createBtn.UseVisualStyleBackColor = true;
+            createBtn.Location = new System.Drawing.Point(12, 230);
+            createBtn.Name = "createBtn";
+            createBtn.Size = new System.Drawing.Size(94, 29);
+            createBtn.TabIndex = 10;
+            createBtn.Text = "Create";
+            createBtn.UseVisualStyleBackColor = true;
+            createBtn.Click += createBtn_Click;
             // 
             // updateBtn
             // 
-            this.updateBtn.Location = new System.Drawing.Point(112, 230);
-            this.updateBtn.Name = "updateBtn";
-            this.updateBtn.Size = new System.Drawing.Size(94, 29);
-            this.updateBtn.TabIndex = 11;
-            this.updateBtn.Text = "Update";
-            this.updateBtn.UseVisualStyleBackColor = true;
+            updateBtn.Location = new System.Drawing.Point(112, 230);
+            updateBtn.Name = "updateBtn";
+            updateBtn.Size = new System.Drawing.Size(94, 29);
+            updateBtn.TabIndex = 11;
+            updateBtn.Text = "Update";
+            updateBtn.UseVisualStyleBackColor = true;
+            updateBtn.Click += updateBtn_Click;
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(212, 230);
-            this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(94, 29);
-            this.deleteBtn.TabIndex = 12;
-            this.deleteBtn.Text = "Delete";
-            this.deleteBtn.UseVisualStyleBackColor = true;
+            deleteBtn.Location = new System.Drawing.Point(212, 230);
+            deleteBtn.Name = "deleteBtn";
+            deleteBtn.Size = new System.Drawing.Size(94, 29);
+            deleteBtn.TabIndex = 12;
+            deleteBtn.Text = "Delete";
+            deleteBtn.UseVisualStyleBackColor = true;
+            deleteBtn.Click += deleteBtn_Click;
             // 
             // clearBtn
             // 
-            this.clearBtn.Location = new System.Drawing.Point(112, 265);
-            this.clearBtn.Name = "clearBtn";
-            this.clearBtn.Size = new System.Drawing.Size(94, 29);
-            this.clearBtn.TabIndex = 13;
-            this.clearBtn.Text = "Clear";
-            this.clearBtn.UseVisualStyleBackColor = true;
+            clearBtn.Location = new System.Drawing.Point(112, 265);
+            clearBtn.Name = "clearBtn";
+            clearBtn.Size = new System.Drawing.Size(94, 29);
+            clearBtn.TabIndex = 13;
+            clearBtn.Text = "Clear";
+            clearBtn.UseVisualStyleBackColor = true;
+            clearBtn.Click += clearBtn_Click;
             // 
             // closeBtn
             // 
-            this.closeBtn.Location = new System.Drawing.Point(212, 265);
-            this.closeBtn.Name = "closeBtn";
-            this.closeBtn.Size = new System.Drawing.Size(94, 29);
-            this.closeBtn.TabIndex = 14;
-            this.closeBtn.Text = "Close";
-            this.closeBtn.UseVisualStyleBackColor = true;
+            closeBtn.Location = new System.Drawing.Point(212, 265);
+            closeBtn.Name = "closeBtn";
+            closeBtn.Size = new System.Drawing.Size(94, 29);
+            closeBtn.TabIndex = 14;
+            closeBtn.Text = "Close";
+            closeBtn.UseVisualStyleBackColor = true;
+            closeBtn.Click += closeBtn_Click;
             // 
             // coloniesLabel
             // 
-            this.coloniesLabel.AutoSize = true;
-            this.coloniesLabel.Location = new System.Drawing.Point(12, 305);
-            this.coloniesLabel.Name = "coloniesLabel";
-            this.coloniesLabel.Size = new System.Drawing.Size(66, 20);
-            this.coloniesLabel.TabIndex = 15;
-            this.coloniesLabel.Text = "Colonies";
+            coloniesLabel.AutoSize = true;
+            coloniesLabel.Location = new System.Drawing.Point(12, 305);
+            coloniesLabel.Name = "coloniesLabel";
+            coloniesLabel.Size = new System.Drawing.Size(66, 20);
+            coloniesLabel.TabIndex = 15;
+            coloniesLabel.Text = "Colonies";
             // 
             // colonyListBox
             // 
-            this.colonyListBox.FormattingEnabled = true;
-            this.colonyListBox.ItemHeight = 20;
-            this.colonyListBox.Location = new System.Drawing.Point(12, 328);
-            this.colonyListBox.Name = "colonyListBox";
-            this.colonyListBox.Size = new System.Drawing.Size(294, 104);
-            this.colonyListBox.TabIndex = 16;
+            colonyListBox.FormattingEnabled = true;
+            colonyListBox.ItemHeight = 20;
+            colonyListBox.Location = new System.Drawing.Point(12, 328);
+            colonyListBox.Name = "colonyListBox";
+            colonyListBox.Size = new System.Drawing.Size(294, 104);
+            colonyListBox.TabIndex = 16;
             // 
             // PetriDishForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(797, 448);
-            this.Controls.Add(this.colonyListBox);
-            this.Controls.Add(this.coloniesLabel);
-            this.Controls.Add(this.closeBtn);
-            this.Controls.Add(this.clearBtn);
-            this.Controls.Add(this.deleteBtn);
-            this.Controls.Add(this.updateBtn);
-            this.Controls.Add(this.createBtn);
-            this.Controls.Add(this.cupboardComboBox);
-            this.Controls.Add(this.cupboardLabel);
-            this.Controls.Add(this.datePicker);
-            this.Controls.Add(this.lastCheckedDateLabel);
-            this.Controls.Add(this.diameterNum);
-            this.Controls.Add(this.Diameter);
-            this.Controls.Add(this.dishesGridView);
-            this.Controls.Add(this.petriDishesLabel);
-            this.Controls.Add(this.solventTxtBox);
-            this.Controls.Add(this.solventLabel);
-            this.Name = "PetriDishForm";
-            this.Text = "PetriDishForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dishesGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.diameterNum)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(800, 444);
+            Controls.Add(colonyListBox);
+            Controls.Add(coloniesLabel);
+            Controls.Add(closeBtn);
+            Controls.Add(clearBtn);
+            Controls.Add(deleteBtn);
+            Controls.Add(updateBtn);
+            Controls.Add(createBtn);
+            Controls.Add(cupboardComboBox);
+            Controls.Add(cupboardLabel);
+            Controls.Add(datePicker);
+            Controls.Add(lastCheckedDateLabel);
+            Controls.Add(diameterNum);
+            Controls.Add(Diameter);
+            Controls.Add(dishesGridView);
+            Controls.Add(petriDishesLabel);
+            Controls.Add(solventTxtBox);
+            Controls.Add(solventLabel);
+            Name = "PetriDishForm";
+            Text = "PetriDishForm";
+            Shown += PetriDishForm_Shown;
+            ((System.ComponentModel.ISupportInitialize)dishesGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)diameterNum).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
