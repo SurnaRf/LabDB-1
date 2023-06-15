@@ -84,7 +84,7 @@ namespace DataLayer
 
 				if (useNavigationalProperties)
 				{
-					PetriDish petriDish = dbContext.PetriDishes.Find(item.PetriDish);
+					PetriDish petriDish = dbContext.PetriDishes.Find(item.PetriDishId);
 
 					if (petriDish != null)
 					{
