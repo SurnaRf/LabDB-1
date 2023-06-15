@@ -142,6 +142,8 @@ namespace PresentationLayer
 
                 MessageBox.Show("Cupboard updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                ClearState();
+
                 roomTxtBox.Focus();
             }
             catch (Exception ex)

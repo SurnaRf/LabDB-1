@@ -170,12 +170,15 @@ namespace PresentationLayer
                 selectedDish.Diameter = (float)diameterNum.Value;
                 selectedDish.LastCheckDate = datePicker.Value;
                 selectedDish.Cupboard = cupboardComboBox.SelectedItem as Cupboard;
+                selectedDish.CupboardId = selectedDish.Cupboard.Id;
 
                 dbManager.Update(selectedDish, true);
 
                 MessageBox.Show(
                     "Petri dish updated successfully!", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                ClearState();
 
                 solventTxtBox.Focus();
             }

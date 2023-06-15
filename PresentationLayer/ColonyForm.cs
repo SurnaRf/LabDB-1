@@ -102,10 +102,13 @@ namespace PresentationLayer
                     selectedColony.Count = (int)countNumericUpDown.Value;
                     selectedColony.Days = (int)daysNumericUpDown.Value;
                     selectedColony.PetriDish = petriDishesListBox.SelectedItem as PetriDish;
+                    selectedColony.PetriDishId = selectedColony.PetriDish.Id;
 
                     dbManager.Update(selectedColony, true);
 
                     MessageBox.Show("Colony updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    ClearState();
 
                     bacteriaTxtBox.Focus();
                 }
