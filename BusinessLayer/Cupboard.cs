@@ -47,5 +47,10 @@ namespace BusinessLayer
             Scientist = scientist;
             LightType = lightType;
         }
-    }
+
+		public override string ToString()
+		{
+			return $"<{Id}>-{Room}-{Scientist}-{LightType}";
+		}
+	}
 }
