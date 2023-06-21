@@ -13,239 +13,299 @@ using ServiceLayer;
 
 namespace PresentationLayer
 {
-    public partial class PetriDishForm : Form
-    {
-        private DbManager<PetriDish, int> dbManager
-            = new(ContextGenerator.GetPetriDishContext());
+	public partial class PetriDishForm : Form
+	{
+		private DbManager<PetriDish, int> dbManager
+			= new(ContextGenerator.GetPetriDishContext());
 
-        private SortedDictionary<int, PetriDish>? trackedDishes;
-        private PetriDish? selectedDish = null;
+		private SortedDictionary<int, PetriDish>? trackedDishes;
+		private PetriDish? selectedDish = null;
 
-        private DbManager<Cupboard, int> cupboardManager
-            = new(ContextGenerator.GetCupboardContext());
+		private DbManager<Cupboard, int> cupboardManager
+			= new(ContextGenerator.GetCupboardContext());
 
-        public PetriDishForm()
-        {
-            InitializeComponent();
+		public PetriDishForm()
+		{
+			InitializeComponent();
 
-            try
-            {
-                trackedDishes = new(dbManager.ReadAll(true)
-                    .ToDictionary(d => d.Id));
+			try
+			{
+				trackedDishes = new(dbManager.ReadAll(true)
+					.ToDictionary(d => d.Id));
 
-                // Cupboard combo box
-                cupboardComboBox.DisplayMember = "Room";
-                foreach (var cupboard in cupboardManager.ReadAll())
-                    cupboardComboBox.Items.Add(cupboard);
+				// Cupboard combo box
+				cupboardComboBox.DisplayMember = "Room";
+				foreach (var cupboard in cupboardManager.ReadAll())
+					cupboardComboBox.Items.Add(cupboard);
 
-                dishesGridView.ReadOnly = true;
-                colonyListBox.Enabled = false;
-                colonyListBox.SelectionMode = SelectionMode.None;
-            }
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null) ex = ex.InnerException;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+				dishesGridView.ReadOnly = true;
+				colonyListBox.Enabled = false;
+				colonyListBox.SelectionMode = SelectionMode.None;
 
-        #region HelperMethods
+				dishesGridView.ReadOnly = true;
+				dishesGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(227, 118, 186);
+				dishesGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(227, 118, 186);
+				dishesGridView.EnableHeadersVisualStyles = false;
+				dishesGridView.GridColor = Color.FromArgb(214, 84, 165);
+				dishesGridView.DefaultCellStyle.BackColor = Color.FromArgb(232, 169, 208);
+			}
+			catch (Exception ex)
+			{
+				while (ex.InnerException != null) ex = ex.InnerException;
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-        private void SetCreation(bool unlock = true)
-        {
-            createBtn.Enabled = unlock;
+		#region HelperMethods
 
-            updateBtn.Enabled =
-            deleteBtn.Enabled = !unlock;
-        }
+		private void SetCreation(bool unlock = true)
+		{
+			createBtn.Enabled = unlock;
 
-        private void ClearState()
-        {
-            SetCreation();
+			updateBtn.Enabled =
+			deleteBtn.Enabled = !unlock;
+		}
 
-            selectedDish = null;
+		private void ClearState()
+		{
+			SetCreation();
 
-            solventTxtBox.Text = string.Empty;
-            solventTxtBox.Focus();
+			selectedDish = null;
 
-            diameterNum.Value = 0;
-            datePicker.Value = DateTime.UtcNow;
-            cupboardComboBox.SelectedIndex = 0;
+			solventTxtBox.Text = string.Empty;
+			solventTxtBox.Focus();
 
-            dishesGridView.DataSource = null;
-            dishesGridView.DataSource = trackedDishes?.Values.ToList();
-        }
+			diameterNum.Value = 0;
+			datePicker.Value = DateTime.UtcNow;
+			cupboardComboBox.SelectedIndex = 0;
 
-        private void FillInputs()
-        {
-            if (selectedDish == null) return;
+			dishesGridView.DataSource = null;
+			dishesGridView.DataSource = trackedDishes?.Values.ToList();
+		}
 
-            try
-            {
-                solventTxtBox.Text = selectedDish.Solvent;
-                diameterNum.Value = (decimal)selectedDish.Diameter;
-                datePicker.Value = selectedDish.LastCheckDate;
+		private void FillInputs()
+		{
+			if (selectedDish == null) return;
 
-                cupboardComboBox.SelectedIndex =
-                    cupboardComboBox.Items
-                    .IndexOf(selectedDish.Cupboard);
+			try
+			{
+				solventTxtBox.Text = selectedDish.Solvent;
+				diameterNum.Value = (decimal)selectedDish.Diameter;
+				datePicker.Value = selectedDish.LastCheckDate;
 
-                colonyListBox.Items.Clear();
-                foreach (var colony in selectedDish.Colonies)
-                    colonyListBox.Items.Add(colony.ToString());
-            }
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null) ex = ex.InnerException;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+				cupboardComboBox.SelectedIndex =
+					cupboardComboBox.Items
+					.IndexOf(selectedDish.Cupboard);
 
-        #endregion
+				colonyListBox.Items.Clear();
+				foreach (var colony in selectedDish.Colonies)
+					colonyListBox.Items.Add(colony.ToString());
+			}
+			catch (Exception ex)
+			{
+				while (ex.InnerException != null) ex = ex.InnerException;
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-        #region Events
+		#endregion
 
-        private void PetriDishForm_Shown(object sender, EventArgs e)
-        {
-            try
-            {
-                if (cupboardComboBox.Items.Count == 0)
-                {
-                    MessageBox.Show("Warning", "No cupboards recorded.",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    this.Close();
-                    return;
-                }
+		#region Events
 
-                ClearState();
-            }
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null) ex = ex.InnerException;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+		private void PetriDishForm_Shown(object sender, EventArgs e)
+		{
+			try
+			{
+				if (cupboardComboBox.Items.Count == 0)
+				{
+					MessageBox.Show("Warning", "No cupboards recorded.",
+						MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					this.Close();
+					return;
+				}
 
-        private void createBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                PetriDish dish = new(
-                    solventTxtBox.Text,
-                    (float)diameterNum.Value,
-                    datePicker.Value,
-                    cupboardComboBox.SelectedItem as Cupboard);
+				ClearState();
+			}
+			catch (Exception ex)
+			{
+				while (ex.InnerException != null) ex = ex.InnerException;
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-                dbManager.Create(dish);
+		private void createBtn_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				PetriDish dish = new(
+					solventTxtBox.Text,
+					(float)diameterNum.Value,
+					datePicker.Value,
+					cupboardComboBox.SelectedItem as Cupboard);
 
-                trackedDishes?.Add(dish.Id, dish);
+				dbManager.Create(dish);
 
-                ClearState();
+				trackedDishes?.Add(dish.Id, dish);
 
-                MessageBox.Show(
-                    "Dish created successfully.",
-                    "Success", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null) ex = ex.InnerException;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+				ClearState();
 
-        private void updateBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (selectedDish == null)
-                {
-                    MessageBox.Show("A petri dish must be selected.",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    solventTxtBox.Focus();
-                    return;
-                }
+				MessageBox.Show(
+					"Dish created successfully.",
+					"Success", MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
+			}
+			catch (Exception ex)
+			{
+				while (ex.InnerException != null) ex = ex.InnerException;
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-                selectedDish.Solvent = solventTxtBox.Text;
-                selectedDish.Diameter = (float)diameterNum.Value;
-                selectedDish.LastCheckDate = datePicker.Value;
-                selectedDish.Cupboard = cupboardComboBox.SelectedItem as Cupboard;
-                selectedDish.CupboardId = selectedDish.Cupboard.Id;
+		private void updateBtn_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (selectedDish == null)
+				{
+					MessageBox.Show("A petri dish must be selected.",
+						"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					solventTxtBox.Focus();
+					return;
+				}
 
-                dbManager.Update(selectedDish, true);
+				selectedDish.Solvent = solventTxtBox.Text;
+				selectedDish.Diameter = (float)diameterNum.Value;
+				selectedDish.LastCheckDate = datePicker.Value;
+				selectedDish.Cupboard = cupboardComboBox.SelectedItem as Cupboard;
+				selectedDish.CupboardId = selectedDish.Cupboard.Id;
 
-                MessageBox.Show(
-                    "Petri dish updated successfully!", "Success",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+				dbManager.Update(selectedDish, true);
 
-                ClearState();
+				MessageBox.Show(
+					"Petri dish updated successfully!", "Success",
+					MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                solventTxtBox.Focus();
-            }
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null) ex = ex.InnerException;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+				ClearState();
 
-        private void deleteBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (selectedDish == null)
-                {
-                    MessageBox.Show("A petri dish must be selected.",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    solventTxtBox.Focus();
-                    return;
-                }
+				solventTxtBox.Focus();
+			}
+			catch (Exception ex)
+			{
+				while (ex.InnerException != null) ex = ex.InnerException;
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-                trackedDishes?.Remove(selectedDish.Id);
+		private void deleteBtn_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (selectedDish == null)
+				{
+					MessageBox.Show("A petri dish must be selected.",
+						"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					solventTxtBox.Focus();
+					return;
+				}
 
-                dbManager.Delete(selectedDish.Id);
+				trackedDishes?.Remove(selectedDish.Id);
 
-                ClearState();
+				dbManager.Delete(selectedDish.Id);
 
-                MessageBox.Show(
-                    "Petri dish deleted successfully.", "Success",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null) ex = ex.InnerException;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+				ClearState();
 
-        private void dishesGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+				MessageBox.Show(
+					"Petri dish deleted successfully.", "Success",
+					MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+			catch (Exception ex)
+			{
+				while (ex.InnerException != null) ex = ex.InnerException;
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-                selectedDish = dishesGridView.Rows[e.RowIndex].DataBoundItem as PetriDish;
-                SetCreation(false);
-                FillInputs();
-            }
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null) ex = ex.InnerException;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+		private void dishesGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			try
+			{
+				if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
-        private void clearBtn_Click(object sender, EventArgs e)
-        {
-            ClearState();
-        }
+				selectedDish = dishesGridView.Rows[e.RowIndex].DataBoundItem as PetriDish;
+				SetCreation(false);
+				FillInputs();
+			}
+			catch (Exception ex)
+			{
+				while (ex.InnerException != null) ex = ex.InnerException;
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-        private void closeBtn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+		
+		private void clearBtn_Click(object sender, EventArgs e)
+		{
+			ClearState();
+		}
 
-        #endregion
+		private void closeBtn_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 
-    }
+		#endregion
+
+		#region Colors
+		private void createBtn_MouseEnter(object sender, EventArgs e)
+		{
+			createBtn.BackColor = Color.FromArgb(59, 155, 217);
+		}
+
+		private void createBtn_MouseLeave(object sender, EventArgs e)
+		{
+			createBtn.BackColor = Color.FromArgb(167, 198, 218);
+		}
+
+		private void updateBtn_MouseEnter(object sender, EventArgs e)
+		{
+			updateBtn.BackColor = Color.FromArgb(59, 155, 217);
+
+		}
+
+		private void updateBtn_MouseLeave(object sender, EventArgs e)
+		{
+			updateBtn.BackColor = Color.FromArgb(167, 198, 218);
+		}
+
+		private void deleteBtn_MouseEnter(object sender, EventArgs e)
+		{
+			deleteBtn.BackColor = Color.FromArgb(59, 155, 217);
+		}
+
+		private void deleteBtn_MouseLeave(object sender, EventArgs e)
+		{
+			deleteBtn.BackColor = Color.FromArgb(167, 198, 218);
+		}
+
+		private void clearBtn_MouseEnter(object sender, EventArgs e)
+		{
+			clearBtn.BackColor = Color.FromArgb(59, 155, 217);
+		}
+
+		private void clearBtn_MouseLeave(object sender, EventArgs e)
+		{
+			clearBtn.BackColor = Color.FromArgb(167, 198, 218);
+		}
+
+		private void closeBtn_MouseEnter(object sender, EventArgs e)
+		{
+			closeBtn.BackColor = Color.FromArgb(59, 155, 217);
+		}
+
+		private void closeBtn_MouseLeave(object sender, EventArgs e)
+		{
+			closeBtn.BackColor = Color.FromArgb(167, 198, 218);
+		}
+		#endregion
+	}
 }

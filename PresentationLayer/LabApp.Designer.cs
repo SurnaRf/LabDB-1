@@ -35,38 +35,48 @@
 			// 
 			// colonyBtn
 			// 
+			colonyBtn.BackColor = System.Drawing.Color.FromArgb(167, 198, 218);
 			colonyBtn.Location = new System.Drawing.Point(103, 223);
 			colonyBtn.Name = "colonyBtn";
 			colonyBtn.Size = new System.Drawing.Size(94, 29);
 			colonyBtn.TabIndex = 0;
 			colonyBtn.Text = "Colonies";
-			colonyBtn.UseVisualStyleBackColor = true;
+			colonyBtn.UseVisualStyleBackColor = false;
 			colonyBtn.Click += colonyBtn_Click;
+			colonyBtn.MouseEnter += colonyBtn_MouseEnter;
+			colonyBtn.MouseLeave += colonyBtn_MouseLeave;
 			// 
 			// petriDishBtn
 			// 
+			petriDishBtn.BackColor = System.Drawing.Color.FromArgb(167, 198, 218);
 			petriDishBtn.Location = new System.Drawing.Point(330, 223);
 			petriDishBtn.Name = "petriDishBtn";
 			petriDishBtn.Size = new System.Drawing.Size(94, 29);
 			petriDishBtn.TabIndex = 1;
 			petriDishBtn.Text = "Petri Dishes";
-			petriDishBtn.UseVisualStyleBackColor = true;
+			petriDishBtn.UseVisualStyleBackColor = false;
 			petriDishBtn.Click += petriDishBtn_Click;
+			petriDishBtn.MouseEnter += petriDishBtn_MouseEnter;
+			petriDishBtn.MouseLeave += petriDishBtn_MouseLeave;
 			// 
 			// cupboardBtn
 			// 
+			cupboardBtn.BackColor = System.Drawing.Color.FromArgb(167, 198, 218);
 			cupboardBtn.Location = new System.Drawing.Point(562, 223);
 			cupboardBtn.Name = "cupboardBtn";
 			cupboardBtn.Size = new System.Drawing.Size(94, 29);
 			cupboardBtn.TabIndex = 2;
 			cupboardBtn.Text = "Cupboards";
-			cupboardBtn.UseVisualStyleBackColor = true;
+			cupboardBtn.UseVisualStyleBackColor = false;
 			cupboardBtn.Click += cupboardBtn_Click;
+			cupboardBtn.MouseEnter += cupboardBtn_MouseEnter;
+			cupboardBtn.MouseLeave += cupboardBtn_MouseLeave;
 			// 
 			// LabApp
 			// 
 			AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			BackColor = System.Drawing.Color.FromArgb(245, 250, 235);
 			ClientSize = new System.Drawing.Size(800, 450);
 			Controls.Add(cupboardBtn);
 			Controls.Add(petriDishBtn);

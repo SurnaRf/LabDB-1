@@ -12,201 +12,259 @@ using System.Windows.Forms;
 
 namespace PresentationLayer
 {
-    public partial class CupboardForm : Form
-    {
-        private DbManager<Cupboard, int> dbManager = new(ContextGenerator.GetCupboardContext());
-        private SortedDictionary<int, Cupboard>? trackedCupboards;
-        private Cupboard? selectedCupboard = null;
-        private DbManager<PetriDish, int> petriDishManager = new(ContextGenerator.GetPetriDishContext());
+	public partial class CupboardForm : Form
+	{
+		private DbManager<Cupboard, int> dbManager = new(ContextGenerator.GetCupboardContext());
+		private SortedDictionary<int, Cupboard>? trackedCupboards;
+		private Cupboard? selectedCupboard = null;
+		private DbManager<PetriDish, int> petriDishManager = new(ContextGenerator.GetPetriDishContext());
 
-        public CupboardForm()
-        {
-            InitializeComponent();
+		public CupboardForm()
+		{
+			InitializeComponent();
 
-            try
-            {
-                trackedCupboards = new(dbManager.ReadAll(true)
-                    .ToDictionary(d => d.Id));
+			try
+			{
+				trackedCupboards = new(dbManager.ReadAll(true)
+					.ToDictionary(d => d.Id));
 
-                cupboardsGridView.ReadOnly = true;
-                petriDishListBox.Enabled = false;
-                petriDishListBox.SelectionMode = SelectionMode.None;
-            }
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null) ex = ex.InnerException;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+				cupboardsGridView.ReadOnly = true;
+				petriDishListBox.Enabled = false;
+				petriDishListBox.SelectionMode = SelectionMode.None;
 
-        #region Helper Methods
+				cupboardsGridView.ReadOnly = true;
+				cupboardsGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(227, 118, 186);
+				cupboardsGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(227, 118, 186);
+				cupboardsGridView.EnableHeadersVisualStyles = false;
+				cupboardsGridView.GridColor = Color.FromArgb(214, 84, 165);
+				cupboardsGridView.DefaultCellStyle.BackColor = Color.FromArgb(232, 169, 208);
+			}
+			catch (Exception ex)
+			{
+				while (ex.InnerException != null) ex = ex.InnerException;
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-        private void SetCreation(bool unlock = true)
-        {
-            createBtn.Enabled = unlock;
+		#region Helper Methods
 
-            updateBtn.Enabled =
-            deleteBtn.Enabled = !unlock;
-        }
+		private void SetCreation(bool unlock = true)
+		{
+			createBtn.Enabled = unlock;
 
-        private void ClearState()
-        {
-            SetCreation();
+			updateBtn.Enabled =
+			deleteBtn.Enabled = !unlock;
+		}
 
-            selectedCupboard = null;
+		private void ClearState()
+		{
+			SetCreation();
 
-            roomTxtBox.Text = string.Empty;
-            roomTxtBox.Focus();
-            scientistTxtBox.Text = string.Empty;
-            lightTxtBox.Text = string.Empty;
+			selectedCupboard = null;
 
-            cupboardsGridView.DataSource = null;
-            cupboardsGridView.DataSource = trackedCupboards?.Values.ToList();
-        }
+			roomTxtBox.Text = string.Empty;
+			roomTxtBox.Focus();
+			scientistTxtBox.Text = string.Empty;
+			lightTxtBox.Text = string.Empty;
 
-        private void FillInputs()
-        {
-            if (selectedCupboard == null) return;
+			cupboardsGridView.DataSource = null;
+			cupboardsGridView.DataSource = trackedCupboards?.Values.ToList();
+		}
 
-            try
-            {
-                roomTxtBox.Text = selectedCupboard.Room;
-                scientistTxtBox.Text = selectedCupboard.Scientist;
-                lightTxtBox.Text = selectedCupboard.LightType;
+		private void FillInputs()
+		{
+			if (selectedCupboard == null) return;
 
-                petriDishListBox.Items.Clear();
-                foreach (var dish in selectedCupboard.PetriDishes)
-                    petriDishListBox.Items.Add(dish.ToString());
-            }
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null) ex = ex.InnerException;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+			try
+			{
+				roomTxtBox.Text = selectedCupboard.Room;
+				scientistTxtBox.Text = selectedCupboard.Scientist;
+				lightTxtBox.Text = selectedCupboard.LightType;
 
-        #endregion
+				petriDishListBox.Items.Clear();
+				foreach (var dish in selectedCupboard.PetriDishes)
+					petriDishListBox.Items.Add(dish.ToString());
+			}
+			catch (Exception ex)
+			{
+				while (ex.InnerException != null) ex = ex.InnerException;
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-        #region Events
+		#endregion
 
-        private void CupboardForm_Shown(object sender, EventArgs e)
-        {
-            try
-            {
-                ClearState();
-            }
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null) ex = ex.InnerException;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+		#region Events
 
-        private void createBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Cupboard cupboard = new(roomTxtBox.Text, scientistTxtBox.Text, lightTxtBox.Text);
+		private void CupboardForm_Shown(object sender, EventArgs e)
+		{
+			try
+			{
+				ClearState();
+			}
+			catch (Exception ex)
+			{
+				while (ex.InnerException != null) ex = ex.InnerException;
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-                dbManager.Create(cupboard);
+		private void createBtn_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				Cupboard cupboard = new(roomTxtBox.Text, scientistTxtBox.Text, lightTxtBox.Text);
 
-                trackedCupboards?.Add(cupboard.Id, cupboard);
+				dbManager.Create(cupboard);
 
-                ClearState();
+				trackedCupboards?.Add(cupboard.Id, cupboard);
 
-                MessageBox.Show("Cupboard created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null) ex = ex.InnerException;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+				ClearState();
 
-        private void updateBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (selectedCupboard == null)
-                {
-                    MessageBox.Show("A cupboard must be selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    roomTxtBox.Focus();
-                    return;
-                }
+				MessageBox.Show("Cupboard created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+			catch (Exception ex)
+			{
+				while (ex.InnerException != null) ex = ex.InnerException;
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-                selectedCupboard.Room = roomTxtBox.Text;
-                selectedCupboard.Scientist = scientistTxtBox.Text;
-                selectedCupboard.LightType = lightTxtBox.Text;
+		private void updateBtn_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (selectedCupboard == null)
+				{
+					MessageBox.Show("A cupboard must be selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					roomTxtBox.Focus();
+					return;
+				}
 
-                dbManager.Update(selectedCupboard, true);
+				selectedCupboard.Room = roomTxtBox.Text;
+				selectedCupboard.Scientist = scientistTxtBox.Text;
+				selectedCupboard.LightType = lightTxtBox.Text;
 
-                MessageBox.Show("Cupboard updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				dbManager.Update(selectedCupboard, true);
 
-                ClearState();
+				MessageBox.Show("Cupboard updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                roomTxtBox.Focus();
-            }
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null) ex = ex.InnerException;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+				ClearState();
 
-        private void deleteBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (selectedCupboard == null)
-                {
-                    MessageBox.Show("A cupboard must be selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    roomTxtBox.Focus();
-                    return;
-                }
+				roomTxtBox.Focus();
+			}
+			catch (Exception ex)
+			{
+				while (ex.InnerException != null) ex = ex.InnerException;
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-                trackedCupboards?.Remove(selectedCupboard.Id);
+		private void deleteBtn_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (selectedCupboard == null)
+				{
+					MessageBox.Show("A cupboard must be selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					roomTxtBox.Focus();
+					return;
+				}
 
-                dbManager.Delete(selectedCupboard.Id);
+				trackedCupboards?.Remove(selectedCupboard.Id);
 
-                ClearState();
+				dbManager.Delete(selectedCupboard.Id);
 
-                MessageBox.Show("Cupboard deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null) ex = ex.InnerException;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+				ClearState();
 
-        private void clearBtn_Click(object sender, EventArgs e)
-        {
-            ClearState();
-        }
+				MessageBox.Show("Cupboard deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+			catch (Exception ex)
+			{
+				while (ex.InnerException != null) ex = ex.InnerException;
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-        private void closeBtn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+		private void clearBtn_Click(object sender, EventArgs e)
+		{
+			ClearState();
+		}
 
-        private void cupboardsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+		private void closeBtn_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 
-                selectedCupboard = cupboardsGridView.Rows[e.RowIndex].DataBoundItem as Cupboard;
-                SetCreation(false);
-                FillInputs();
-            }
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null) ex = ex.InnerException;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+		private void cupboardsGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			try
+			{
+				if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
-        #endregion
+				selectedCupboard = cupboardsGridView.Rows[e.RowIndex].DataBoundItem as Cupboard;
+				SetCreation(false);
+				FillInputs();
+			}
+			catch (Exception ex)
+			{
+				while (ex.InnerException != null) ex = ex.InnerException;
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
 
-    }
+		#endregion
+		#region Colors
+		private void createBtn_MouseEnter(object sender, EventArgs e)
+		{
+			createBtn.BackColor = Color.FromArgb(59, 155, 217);
+		}
+
+		private void createBtn_MouseLeave(object sender, EventArgs e)
+		{
+			createBtn.BackColor = Color.FromArgb(167, 198, 218);
+		}
+
+		private void updateBtn_MouseEnter(object sender, EventArgs e)
+		{
+			updateBtn.BackColor = Color.FromArgb(59, 155, 217);
+
+		}
+
+		private void updateBtn_MouseLeave(object sender, EventArgs e)
+		{
+			updateBtn.BackColor = Color.FromArgb(167, 198, 218);
+		}
+
+		private void deleteBtn_MouseEnter(object sender, EventArgs e)
+		{
+			deleteBtn.BackColor = Color.FromArgb(59, 155, 217);
+		}
+
+		private void deleteBtn_MouseLeave(object sender, EventArgs e)
+		{
+			deleteBtn.BackColor = Color.FromArgb(167, 198, 218);
+		}
+
+		private void clearBtn_MouseEnter(object sender, EventArgs e)
+		{
+			clearBtn.BackColor = Color.FromArgb(59, 155, 217);
+		}
+
+		private void clearBtn_MouseLeave(object sender, EventArgs e)
+		{
+			clearBtn.BackColor = Color.FromArgb(167, 198, 218);
+		}
+
+		private void closeBtn_MouseEnter(object sender, EventArgs e)
+		{
+			closeBtn.BackColor = Color.FromArgb(59, 155, 217);
+		}
+
+		private void closeBtn_MouseLeave(object sender, EventArgs e)
+		{
+			closeBtn.BackColor = Color.FromArgb(167, 198, 218);
+		}
+		#endregion
+	}
 }

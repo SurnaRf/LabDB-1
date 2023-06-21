@@ -34,5 +34,35 @@ namespace PresentationLayer
 			ColonyForm colonyForm = new ColonyForm();
 			colonyForm.ShowDialog();
 		}
+
+		private void colonyBtn_MouseEnter(object sender, EventArgs e)
+		{
+			colonyBtn.BackColor = Color.FromArgb(59, 155, 217);
+		}
+
+		private void colonyBtn_MouseLeave(object sender, EventArgs e)
+		{
+			colonyBtn.BackColor = Color.FromArgb(167, 198, 218);
+		}
+
+		private void petriDishBtn_MouseEnter(object sender, EventArgs e)
+		{
+			petriDishBtn.BackColor = Color.FromArgb(59, 155, 217);
+		}
+
+		private void petriDishBtn_MouseLeave(object sender, EventArgs e)
+		{
+			petriDishBtn.BackColor = Color.FromArgb(167, 198, 218);
+		}
+
+		private void cupboardBtn_MouseEnter(object sender, EventArgs e)
+		{
+			cupboardBtn.BackColor = Color.FromArgb(59, 155, 217);
+		}
+
+		private void cupboardBtn_MouseLeave(object sender, EventArgs e)
+		{
+			cupboardBtn.BackColor = Color.FromArgb(167, 198, 218);
+		}
 	}
 }
